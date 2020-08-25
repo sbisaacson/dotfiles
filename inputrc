@@ -1,0 +1,11 @@
+set completion-ignore-case off
+set history-preserve-point on
+set completion-prefix-display-length 2
+tab: menu-complete
+"\e[Z": menu-complete-backward
+"\C-p": history-search-backward
+"\e[A": history-search-backward
+"\e0A": history-search-backward
+"\C-n": history-search-forward
+"\e[B": history-search-forward
+"\e0B": history-search-forward
