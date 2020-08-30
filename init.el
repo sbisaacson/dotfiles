@@ -1,3 +1,10 @@
+(package-initialize)
+
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+(blink-cursor-mode 0)
+(ido-mode 1)
+
 (defun kill-region-or-backward-kill-word (beg end)
   "Kill region if transient mark is activated; otherwise kill
 backward until encountering the beginning of a word."
@@ -17,3 +24,40 @@ repeated."
 (global-set-key (kbd "C-a") 'back-to-indentation-then-beginning-of-line)
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 (global-set-key (kbd "C-w") 'kill-region-or-backward-kill-word)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(Man-width 80)
+ '(ido-enable-flex-matching t)
+ '(package-archives
+   (quote
+    (("gnu" . "https://elpa.gnu.org/packages/")
+     ("melpa-stable" . "https://stable.melpa.org/packages/"))))
+ '(package-selected-packages
+   (quote
+    (rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
+ '(solarized-scale-org-headlines nil)
+ '(solarized-scale-outline-headlines nil)
+ '(solarized-use-variable-pitch nil))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(use-package solarized-theme
+  :config (load-theme 'solarized-light t))
+
+(use-package paredit
+  :hook ((lisp-mode emacs-lisp-mode) . paredit-mode)
+  :defer t)
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package rust-mode :defer t)
