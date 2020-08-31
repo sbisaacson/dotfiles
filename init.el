@@ -7,6 +7,10 @@
 (electric-indent-mode 1)
 
 (add-hook 'prog-mode-hook (lambda () (linum-mode 1)))
+(add-hook 'text-mode-hook
+	  (lambda ()
+	    (auto-fill-mode 1)
+	    (flyspell-mode 1)))
 
 (defun kill-region-or-backward-kill-word (beg end)
   "Kill region if transient mark is activated; otherwise kill
@@ -38,13 +42,43 @@ repeated."
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
  '(org-hide-leading-stars t)
+ '(org-latex-classes
+   (quote
+    (("beamer" "\\documentclass[presentation]{beamer}"
+      ("\\section{%s}" . "\\section*{%s}")
+      ("\\subsection{%s}" . "\\subsection*{%s}")
+      ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+     ("article" "\\documentclass[11pt]{article}"
+      ("\\section{%s}" . "\\section*{%s}")
+      ("\\subsection{%s}" . "\\subsection*{%s}")
+      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+      ("\\paragraph{%s}" . "\\paragraph*{%s}")
+      ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+     ("report" "\\documentclass[11pt]{report}"
+      ("\\part{%s}" . "\\part*{%s}")
+      ("\\chapter{%s}" . "\\chapter*{%s}")
+      ("\\section{%s}" . "\\section*{%s}")
+      ("\\subsection{%s}" . "\\subsection*{%s}")
+      ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+     ("book" "\\documentclass[11pt]{book}"
+      ("\\part{%s}" . "\\part*{%s}")
+      ("\\chapter{%s}" . "\\chapter*{%s}")
+      ("\\section{%s}" . "\\section*{%s}")
+      ("\\subsection{%s}" . "\\subsection*{%s}")
+      ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+     ("amsart" "\\documentclass{amsart}"
+      ("\\section{%s}" . "\\section*{%s}")
+      ("\\subsection{%s}" . "\\subsection*{%s}")
+      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+      ("\\paragraph{%s}" . "\\paragraph*{%s}")
+      ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -76,5 +110,8 @@ repeated."
 
 (use-package cc-mode
   :bind (:map c-mode-base-map ("C-c C-f" . clang-format-buffer)))
+
+(use-package expand-region
+  :bind (("C-=" . er/expand-region)))
 
 (server-start)
