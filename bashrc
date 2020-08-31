@@ -6,10 +6,16 @@ case $- in
     *) return;;
 esac
 
+shopt -s direxpand
+
 export ALTERNATE_EDITOR=vim
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
 export PAGER=less
+
+if [[ $INSIDE_EMACS =~ ,comint ]]; then
+    export PAGER=cat
+fi
 
 set -o noclobber
 
