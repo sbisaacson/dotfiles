@@ -4,6 +4,9 @@
 (scroll-bar-mode 0)
 (blink-cursor-mode 0)
 (ido-mode 1)
+(electric-indent-mode 1)
+
+(add-hook 'prog-mode-hook (lambda () (linum-mode 1)))
 
 (defun kill-region-or-backward-kill-word (beg end)
   "Kill region if transient mark is activated; otherwise kill
@@ -31,7 +34,10 @@ repeated."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
+ '(c-basic-offset 4)
  '(ido-enable-flex-matching t)
+ '(inhibit-startup-screen t)
+ '(org-hide-leading-stars t)
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
@@ -53,6 +59,8 @@ repeated."
 (use-package solarized-theme
   :config (load-theme 'solarized-light t))
 
+(use-package tex :defer t)
+
 (use-package paredit
   :hook ((lisp-mode emacs-lisp-mode) . paredit-mode)
   :defer t)
@@ -61,3 +69,12 @@ repeated."
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package rust-mode :defer t)
+
+(use-package clang-format
+  :defer t
+  :commands clang-format-buffer clang-format-region)
+
+(use-package cc-mode
+  :bind (:map c-mode-base-map ("C-c C-f" . clang-format-buffer)))
+
+(server-start)
