@@ -31,6 +31,10 @@ repeated."
 (global-set-key (kbd "C-a") 'back-to-indentation-then-beginning-of-line)
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 (global-set-key (kbd "C-w") 'kill-region-or-backward-kill-word)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

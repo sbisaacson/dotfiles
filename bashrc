@@ -25,6 +25,8 @@ function messdir () {
     printf "$HOME/mess/%(%Y/%W)T\n"
 }
 
+# mess and the c (pushd) and p (popd) aliases break directory tracking
+# in the EMACS shell.
 function mess () {
     local C
     local M
@@ -35,7 +37,7 @@ function mess () {
 	rm -f $C
 	ln -s $M $C
     fi
-    cd $C
+    pushd $C
 }
 
 alias grep="/usr/bin/grep --color=auto"
