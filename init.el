@@ -114,4 +114,5 @@ repeated."
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
 
-(server-start)
+(unless noninteractive
+  (server-start))
