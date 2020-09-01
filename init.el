@@ -78,7 +78,7 @@ repeated."
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -113,6 +113,10 @@ repeated."
 
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
+
+(use-package magit :defer t)
+
+(use-package markdown-mode :defer t)
 
 (unless noninteractive
   (server-start))

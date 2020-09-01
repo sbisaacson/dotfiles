@@ -21,6 +21,23 @@ set -o noclobber
 
 PS1='\\$ '
 
+function messdir () {
+    printf "$HOME/mess/%(%Y/%W)T\n"
+}
+
+function mess () {
+    local C
+    local M
+    M="$(messdir)"
+    C="$HOME/mess/current"
+    if [[ $(readlink $C) != $M ]]; then
+	mkdir -p $M
+	rm -f $C
+	ln -s $M $C
+    fi
+    cd $C
+}
+
 alias grep="/usr/bin/grep --color=auto"
 alias egrep="/usr/bin/egrep --color=auto"
 alias fgrep="/usr/bin/fgrep --color=auto"
@@ -29,6 +46,8 @@ alias ls="ls --color=auto -F"
 alias rm="/usr/bin/rm -i"
 alias cp="/usr/bin/cp -i"
 alias mv="/usr/bin/mv -i"
+alias c="pushd"
+alias p="popd"
 alias o="$PAGER"
 alias v="gio open"
 
