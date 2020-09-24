@@ -82,7 +82,7 @@ repeated."
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ace-window avy markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (multiple-cursors ace-window avy markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -125,6 +125,12 @@ repeated."
 (use-package avy :bind ("C-'" . avy-goto-char-2))
 
 (use-package ace-window :bind ("M-o" . ace-window))
+
+(use-package multiple-cursors
+  :bind (("C->" . mc/mark-next-like-this)
+	 ("C-<" . mc/mark-previous-like-this)
+	 ("C-+" . mc/mark-more-like-this-extended)
+	 ("C-S-c C-S-c" . mc/edit-lines)))
 
 (unless noninteractive
   (server-start))
