@@ -82,7 +82,7 @@ repeated."
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (multiple-cursors ace-window avy markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (cargo multiple-cursors ace-window avy markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -107,6 +107,8 @@ repeated."
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package rust-mode :defer t)
+
+(use-package cargo :defer t :hook (rust-mode . cargo-minor-mode))
 
 (use-package clang-format
   :defer t
