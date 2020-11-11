@@ -1,3 +1,8 @@
+;;; init.el --- Initialization file for EMACS
+;;; Commentary: Emacs Startup File --- initialization for EMACS
+
+;;; Code:
+
 (package-initialize)
 
 (tool-bar-mode 0)
@@ -13,8 +18,10 @@
 	    (flyspell-mode 1)))
 
 (defun kill-region-or-backward-kill-word (beg end)
-  "Kill region if transient mark is activated; otherwise kill
-backward until encountering the beginning of a word."
+  "Kill region or delete previous word.
+
+If variable `transient-mark-mode' is activated, kill the region; otherwise
+kill backward until encountering the beginning of a word."
   (interactive (list (point) (mark)))
   (if (and transient-mark-mode mark-active)
       (kill-region beg end)
@@ -43,6 +50,12 @@ repeated."
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
  '(c-basic-offset 4)
+ '(company-backends
+   (quote
+    (company-bbdb company-semantic company-cmake company-capf company-clang company-files
+		  (company-dabbrev-code company-gtags company-etags company-keywords)
+		  company-oddmuse company-dabbrev)))
+ '(company-tooltip-align-annotations t)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
  '(org-hide-leading-stars t)
@@ -79,10 +92,10 @@ repeated."
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa-stable" . "https://stable.melpa.org/packages/"))))
+     ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (cargo multiple-cursors ace-window avy markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (clang-format toml-mode flycheck-rust lsp-ui flycheck cargo multiple-cursors ace-window avy markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -105,10 +118,6 @@ repeated."
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package rust-mode :defer t)
-
-(use-package cargo :defer t :hook (rust-mode . cargo-minor-mode))
 
 (use-package clang-format
   :defer t
@@ -134,5 +143,26 @@ repeated."
 	 ("C-+" . mc/mark-more-like-this-extended)
 	 ("C-S-c C-S-c" . mc/edit-lines)))
 
+(use-package flycheck :hook (prog-mode . flycheck-mode))
+
+(use-package company :hook (prog-mode . company-mode))
+
+(use-package lsp-mode :commands lsp)
+
+(use-package lsp-ui)
+
+(use-package toml-mode)
+
+(use-package rust-mode :defer t :hook (rust-mode . lsp))
+
+(use-package cargo :defer t :hook (rust-mode . cargo-minor-mode))
+
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook 'flycheck-rust-setup))
+
 (unless noninteractive
   (server-start))
+
+(provide 'init)
+
+;;; init.el ends here
