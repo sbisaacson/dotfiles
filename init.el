@@ -58,6 +58,7 @@ repeated."
  '(company-tooltip-align-annotations t)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
+ '(lsp-rust-server (quote rust-analyzer))
  '(org-hide-leading-stars t)
  '(org-latex-classes
    (quote
@@ -162,7 +163,5 @@ repeated."
 
 (unless noninteractive
   (server-start))
-
-(provide 'init)
 
 ;;; init.el ends here
