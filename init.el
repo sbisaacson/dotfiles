@@ -10,6 +10,7 @@
 (blink-cursor-mode 0)
 (ido-mode 1)
 (electric-indent-mode 1)
+(show-paren-mode 1)
 
 (add-hook 'prog-mode-hook (lambda () (linum-mode 1)))
 (add-hook 'text-mode-hook
@@ -35,6 +36,9 @@ repeated."
       (move-beginning-of-line nil)
     (back-to-indentation)))
 
+(defun recompile-all-packages ()
+  (byte-recompile-directory package-user-dir nil 'force))
+
 (global-set-key (kbd "C-a") 'back-to-indentation-then-beginning-of-line)
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 (global-set-key (kbd "C-w") 'kill-region-or-backward-kill-word)
@@ -50,15 +54,8 @@ repeated."
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
  '(c-basic-offset 4)
- '(company-backends
-   (quote
-    (company-bbdb company-semantic company-cmake company-capf company-clang company-files
-		  (company-dabbrev-code company-gtags company-etags company-keywords)
-		  company-oddmuse company-dabbrev)))
- '(company-tooltip-align-annotations t)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
- '(lsp-rust-server (quote rust-analyzer))
  '(org-hide-leading-stars t)
  '(org-latex-classes
    (quote
@@ -96,7 +93,7 @@ repeated."
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (clang-format toml-mode flycheck-rust lsp-ui flycheck cargo multiple-cursors ace-window avy markdown-mode magit expand-region rust-mode rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -107,6 +104,15 @@ repeated."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(use-package company
+  :config (global-company-mode t))
+
+;; (add-to-list 'eglot-server-programs '((rust-mode eglot-rls "rust-analyzer")))
+
+(use-package eglot :defer t
+  :config (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+  :hook (prog-mode . eglot-ensure))
 
 (use-package solarized-theme
   :config (load-theme 'solarized-light t))
@@ -144,22 +150,11 @@ repeated."
 	 ("C-+" . mc/mark-more-like-this-extended)
 	 ("C-S-c C-S-c" . mc/edit-lines)))
 
-(use-package flycheck :hook (prog-mode . flycheck-mode))
-
-(use-package company :hook (prog-mode . company-mode))
-
-(use-package lsp-mode :commands lsp)
-
-(use-package lsp-ui)
-
 (use-package toml-mode)
 
-(use-package rust-mode :defer t :hook (rust-mode . lsp))
+(use-package rust-mode :defer t)
 
-(use-package cargo :defer t :hook (rust-mode . cargo-minor-mode))
-
-(use-package flycheck-rust
-  :config (add-hook 'flycheck-mode-hook 'flycheck-rust-setup))
+(use-package cargo :defer t :hook ((toml-mode rust-mode) . cargo-minor-mode))
 
 (unless noninteractive
   (server-start))
