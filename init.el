@@ -12,7 +12,7 @@
 (electric-indent-mode 1)
 (show-paren-mode 1)
 
-(add-hook 'prog-mode-hook (lambda () (linum-mode 1)))
+(add-hook 'prog-mode-hook (lambda () (linum-mode 1) (flymake-mode 1)))
 (add-hook 'text-mode-hook
 	  (lambda ()
 	    (auto-fill-mode 1)
@@ -93,7 +93,7 @@ repeated."
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (eldoc-box company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -108,11 +108,13 @@ repeated."
 (use-package company
   :config (global-company-mode t))
 
-;; (add-to-list 'eglot-server-programs '((rust-mode eglot-rls "rust-analyzer")))
-
 (use-package eglot :defer t
   :config (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-  :hook (prog-mode . eglot-ensure))
+  ;; (add-to-list 'eglot-server-programs '(rust-mode eglot-rls "rust-analyzer"))
+  :hook ((rust-mode c-mode c++-mode python-mode) . eglot-ensure))
+
+;; Should this be eldoc-mode?
+(use-package eldoc-box :hook (eglot-managed-mode . eldoc-box-hover-mode))
 
 (use-package solarized-theme
   :config (load-theme 'solarized-light t))
