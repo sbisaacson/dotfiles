@@ -5,12 +5,13 @@
 
 (package-initialize)
 
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
 (blink-cursor-mode 0)
-(ido-mode 1)
+(column-number-mode 1)
 (electric-indent-mode 1)
+(ido-mode 1)
+(scroll-bar-mode 0)
 (show-paren-mode 1)
+(tool-bar-mode 0)
 
 (add-hook 'prog-mode-hook (lambda () (linum-mode 1) (flymake-mode 1)))
 (add-hook 'text-mode-hook
@@ -29,14 +30,14 @@ kill backward until encountering the beginning of a word."
     (backward-kill-word 1)))
 
 (defun back-to-indentation-then-beginning-of-line ()
-  "Move point to indentation, then to beginning of line if
-repeated."
+  "Move to the first non-whitespace character, then to column 0."
   (interactive)
   (if (eq last-command this-command)
       (move-beginning-of-line nil)
     (back-to-indentation)))
 
 (defun recompile-all-packages ()
+  "Force the compilation of all user packages."
   (byte-recompile-directory package-user-dir nil 'force))
 
 (global-set-key (kbd "C-a") 'back-to-indentation-then-beginning-of-line)
@@ -93,7 +94,7 @@ repeated."
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (eldoc-box company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (projectile eldoc-box company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
@@ -105,6 +106,19 @@ repeated."
  ;; If there is more than one, they won't work right.
  )
 
+(use-package ace-window :bind ("M-o" . ace-window))
+
+(use-package avy :bind ("C-'" . avy-goto-char-2) ("M-g g" . avy-goto-line))
+
+(use-package cargo :defer t :hook ((toml-mode rust-mode) . cargo-minor-mode))
+
+(use-package cc-mode)
+
+(use-package clang-format
+  :defer t
+  :commands clang-format-buffer clang-format-region
+  :bind (:map c-mode-base-map ("C-c C-f" . clang-format-buffer)))
+
 (use-package company
   :config (global-company-mode t))
 
@@ -113,27 +127,7 @@ repeated."
   ;; (add-to-list 'eglot-server-programs '(rust-mode eglot-rls "rust-analyzer"))
   :hook ((rust-mode c-mode c++-mode python-mode) . eglot-ensure))
 
-;; Should this be eldoc-mode?
 (use-package eldoc-box :hook (eglot-managed-mode . eldoc-box-hover-mode))
-
-(use-package solarized-theme
-  :config (load-theme 'solarized-light t))
-
-(use-package tex :defer t)
-
-(use-package paredit
-  :hook ((lisp-mode emacs-lisp-mode) . paredit-mode)
-  :defer t)
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package clang-format
-  :defer t
-  :commands clang-format-buffer clang-format-region)
-
-(use-package cc-mode
-  :bind (:map c-mode-base-map ("C-c C-f" . clang-format-buffer)))
 
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
@@ -142,21 +136,32 @@ repeated."
 
 (use-package markdown-mode :defer t)
 
-(use-package avy :bind ("C-'" . avy-goto-char-2))
-
-(use-package ace-window :bind ("M-o" . ace-window))
-
 (use-package multiple-cursors
   :bind (("C->" . mc/mark-next-like-this)
 	 ("C-<" . mc/mark-previous-like-this)
 	 ("C-+" . mc/mark-more-like-this-extended)
 	 ("C-S-c C-S-c" . mc/edit-lines)))
 
-(use-package toml-mode)
+(use-package paredit
+  :hook ((lisp-mode emacs-lisp-mode) . paredit-mode)
+  :defer t)
+
+(use-package projectile
+  :config (projectile-global-mode 1))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package reftex :hook (TeX-mode . reftex-mode))
 
 (use-package rust-mode :defer t)
 
-(use-package cargo :defer t :hook ((toml-mode rust-mode) . cargo-minor-mode))
+(use-package solarized-theme
+  :config (load-theme 'solarized-light t))
+
+(use-package tex :defer t)
+
+(use-package toml-mode)
 
 (unless noninteractive
   (server-start))
