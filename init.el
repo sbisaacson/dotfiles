@@ -94,7 +94,7 @@ kill backward until encountering the beginning of a word."
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (projectile eldoc-box company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
+    (projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -128,8 +128,6 @@ kill backward until encountering the beginning of a word."
   :config (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
   ;; (add-to-list 'eglot-server-programs '(rust-mode eglot-rls "rust-analyzer"))
   :hook ((rust-mode c-mode c++-mode python-mode) . eglot-ensure))
-
-(use-package eldoc-box :hook (eglot-managed-mode . eldoc-box-hover-mode))
 
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
