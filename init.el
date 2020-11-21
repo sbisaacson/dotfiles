@@ -147,7 +147,8 @@ kill backward until encountering the beginning of a word."
   :defer t)
 
 (use-package projectile
-  :config (projectile-global-mode 1))
+  :config (projectile-global-mode 1)
+  :bind-keymap ("C-c p" . projectile-command-map))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
