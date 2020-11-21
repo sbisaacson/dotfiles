@@ -55,6 +55,7 @@ kill backward until encountering the beginning of a word."
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
  '(c-basic-offset 4)
+ '(eldoc-echo-area-use-multiline-p nil)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
  '(org-hide-leading-stars t)
