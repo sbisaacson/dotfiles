@@ -96,6 +96,7 @@ kill backward until encountering the beginning of a word."
    (quote
     (projectile eldoc-box company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
  '(python-shell-interpreter "ipython3")
+ '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil))
