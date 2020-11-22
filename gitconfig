@@ -1,3 +1,11 @@
 [user]
 name = Samuel Isaacson
 email = samuel.b.isaacson@gmail.com
+
+[init]
+defaultBranch = main
+
+# Unfortunately, we can't make --no-commit the default for merge.
+
+[pull]
+ff = only 
