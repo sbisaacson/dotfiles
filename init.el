@@ -48,6 +48,11 @@ kill backward until encountering the beginning of a word."
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+ ;; M-SPC requires disabling this shortcut in the window manager
+(global-set-key (kbd "M-SPC") 'cycle-spacing)
+(global-set-key (kbd "M-u") 'upcase-dwim)
+(global-set-key (kbd "M-l") 'downcase-dwim)
+(global-set-key (kbd "M-c") 'capitalize-dwim)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -101,7 +106,8 @@ kill backward until encountering the beginning of a word."
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
- '(solarized-use-variable-pitch nil))
+ '(solarized-use-variable-pitch nil)
+ '(view-read-only t))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
