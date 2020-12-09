@@ -66,8 +66,7 @@ kill backward until encountering the beginning of a word."
  '(inhibit-startup-screen t)
  '(org-hide-leading-stars t)
  '(org-latex-classes
-   (quote
-    (("beamer" "\\documentclass[presentation]{beamer}"
+   '(("beamer" "\\documentclass[presentation]{beamer}"
       ("\\section{%s}" . "\\section*{%s}")
       ("\\subsection{%s}" . "\\subsection*{%s}")
       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
@@ -94,14 +93,12 @@ kill backward until encountering the beginning of a word."
       ("\\subsection{%s}" . "\\subsection*{%s}")
       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
       ("\\paragraph{%s}" . "\\paragraph*{%s}")
-      ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
+      ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
  '(package-archives
-   (quote
-    (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa" . "https://melpa.org/packages/"))))
+   '(("gnu" . "https://elpa.gnu.org/packages/")
+     ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   (quote
-    (projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme)))
+   '(easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -131,6 +128,11 @@ kill backward until encountering the beginning of a word."
 
 (use-package company
   :config (global-company-mode t))
+
+(use-package easy-kill
+  :ensure t
+  :bind ([remap kill-ring-save] . easy-kill)
+  ([remap mark-sexp] . easy-mark))
 
 (use-package eglot :defer t
   :config (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
@@ -171,6 +173,8 @@ kill backward until encountering the beginning of a word."
 (use-package tex :defer t)
 
 (use-package toml-mode)
+
+(use-package which-key :config (which-key-mode))
 
 (unless noninteractive
   (server-start))
