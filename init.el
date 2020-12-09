@@ -61,6 +61,7 @@ kill backward until encountering the beginning of a word."
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
  '(c-basic-offset 4)
+ '(confirm-kill-emacs 'yes-or-no-p)
  '(eldoc-echo-area-use-multiline-p nil)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
@@ -98,7 +99,7 @@ kill backward until encountering the beginning of a word."
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme))
+   '(undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -173,6 +174,8 @@ kill backward until encountering the beginning of a word."
 (use-package tex :defer t)
 
 (use-package toml-mode)
+
+(use-package undo-tree :config (global-undo-tree-mode))
 
 (use-package which-key :config (which-key-mode))
 
