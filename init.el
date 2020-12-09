@@ -99,7 +99,7 @@ kill backward until encountering the beginning of a word."
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme))
+   '(diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -129,6 +129,8 @@ kill backward until encountering the beginning of a word."
 
 (use-package company
   :config (global-company-mode t))
+
+(use-package diff-hl :config (global-diff-hl-mode))
 
 (use-package easy-kill
   :ensure t
