@@ -63,7 +63,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(company-prescient selectrum-prescient selectrum smartparens diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
+   '(crux company-prescient selectrum-prescient selectrum smartparens diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -83,17 +83,18 @@
 
 (use-package avy :bind ("C-'" . avy-goto-char-2) ("M-g g" . avy-goto-line))
 
-(use-package cargo :defer t :hook ((toml-mode rust-mode) . cargo-minor-mode))
+(use-package cargo :hook ((toml-mode rust-mode) . cargo-minor-mode))
 
 (use-package cc-mode)
 
 (use-package clang-format
-  :defer t
   :commands clang-format-buffer clang-format-region
   :bind (:map c-mode-base-map ("C-c C-f" . clang-format-buffer)))
 
 (use-package company
   :config (global-company-mode t))
+
+(use-package crux :bind ([remap open-line] . crux-smart-open-line))
 
 (use-package diff-hl :config (global-diff-hl-mode))
 
@@ -102,7 +103,7 @@
   :bind ([remap kill-ring-save] . easy-kill)
   ([remap mark-sexp] . easy-mark))
 
-(use-package eglot :defer t
+(use-package eglot
   :config (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
   ;; (add-to-list 'eglot-server-programs '(rust-mode eglot-rls "rust-analyzer"))
   :hook ((rust-mode c-mode c++-mode python-mode) . eglot-ensure))
