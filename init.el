@@ -8,7 +8,6 @@
 (blink-cursor-mode 0)
 (column-number-mode 1)
 (electric-indent-mode 1)
-(ido-mode 1)
 (scroll-bar-mode 0)
 (show-paren-mode 1)
 (tool-bar-mode 0)
@@ -18,41 +17,6 @@
 	  (lambda ()
 	    (auto-fill-mode 1)
 	    (flyspell-mode 1)))
-
-(defun kill-region-or-backward-kill-word (beg end)
-  "Kill region or delete previous word.
-
-If variable `transient-mark-mode' is activated, kill the region; otherwise
-kill backward until encountering the beginning of a word."
-  (interactive (list (point) (mark)))
-  (if (and transient-mark-mode mark-active)
-      (kill-region beg end)
-    (backward-kill-word 1)))
-
-(defun back-to-indentation-then-beginning-of-line ()
-  "Move to the first non-whitespace character, then to column 0."
-  (interactive)
-  (if (eq last-command this-command)
-      (move-beginning-of-line nil)
-    (back-to-indentation)))
-
-(defun recompile-all-packages ()
-  "Force the compilation of all user packages."
-  (byte-recompile-directory package-user-dir nil 'force))
-
-(global-set-key (kbd "C-a") 'back-to-indentation-then-beginning-of-line)
-(global-set-key (kbd "M-m") 'move-beginning-of-line)
-(global-set-key (kbd "C-w") 'kill-region-or-backward-kill-word)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
- ;; M-SPC requires disabling this shortcut in the window manager
-(global-set-key (kbd "M-SPC") 'cycle-spacing)
-(global-set-key (kbd "M-u") 'upcase-dwim)
-(global-set-key (kbd "M-l") 'downcase-dwim)
-(global-set-key (kbd "M-c") 'capitalize-dwim)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -99,12 +63,13 @@ kill backward until encountering the beginning of a word."
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex paredit use-package solarized-theme))
+   '(company-prescient selectrum-prescient selectrum smartparens diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil)
+ '(sp-base-key-bindings 'sp)
  '(view-read-only t))
 
 (custom-set-faces
@@ -155,9 +120,7 @@ kill backward until encountering the beginning of a word."
 	 ("C-+" . mc/mark-more-like-this-extended)
 	 ("C-S-c C-S-c" . mc/edit-lines)))
 
-(use-package paredit
-  :hook ((lisp-mode emacs-lisp-mode) . paredit-mode)
-  :defer t)
+(use-package prescient :config (selectrum-prescient-mode t) (company-prescient-mode t))
 
 (use-package projectile
   :config (projectile-global-mode 1)
@@ -170,6 +133,10 @@ kill backward until encountering the beginning of a word."
 
 (use-package rust-mode :defer t)
 
+(use-package selectrum :config (selectrum-mode t))
+
+(use-package smartparens :config (smartparens-global-strict-mode))
+
 (use-package solarized-theme
   :config (load-theme 'solarized-light t))
 
@@ -180,6 +147,41 @@ kill backward until encountering the beginning of a word."
 (use-package undo-tree :config (global-undo-tree-mode))
 
 (use-package which-key :config (which-key-mode))
+
+(defun kill-region-or-backward-kill-word (beg end)
+  "Kill region or delete previous word.
+
+If variable `transient-mark-mode' is activated, kill the region; otherwise
+kill backward until encountering the beginning of a word."
+  (interactive (list (point) (mark)))
+  (cond ((and transient-mark-mode mark-active) (kill-region beg end))
+	(smartparens-strict-mode (sp-backward-kill-word 1))
+	(t (backward-kill-word 1))))
+
+(defun back-to-indentation-then-beginning-of-line ()
+  "Move to the first non-whitespace character, then to column 0."
+  (interactive)
+  (if (eq last-command this-command)
+      (move-beginning-of-line nil)
+    (back-to-indentation)))
+
+(defun recompile-all-packages ()
+  "Force the compilation of all user packages."
+  (byte-recompile-directory package-user-dir nil 'force))
+
+(global-set-key (kbd "C-a") 'back-to-indentation-then-beginning-of-line)
+(global-set-key (kbd "M-m") 'move-beginning-of-line)
+(global-set-key (kbd "C-w") 'kill-region-or-backward-kill-word)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+ ;; M-SPC requires disabling this shortcut in the window manager
+(global-set-key (kbd "M-SPC") 'cycle-spacing)
+(global-set-key (kbd "M-u") 'upcase-dwim)
+(global-set-key (kbd "M-l") 'downcase-dwim)
+(global-set-key (kbd "M-c") 'capitalize-dwim)
 
 (unless noninteractive
   (server-start))
