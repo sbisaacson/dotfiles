@@ -69,7 +69,7 @@
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil)
- '(sp-base-key-bindings 'sp)
+ '(sp-base-key-bindings 'paredit)
  '(view-read-only t))
 
 (custom-set-faces
@@ -111,7 +111,9 @@
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
 
-(use-package magit :defer t)
+(use-package magit
+  :bind ("C-x M-g" . magit-dispatch)
+  ("C-x g" . magit-status))
 
 (use-package markdown-mode :defer t)
 
