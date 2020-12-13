@@ -100,7 +100,7 @@
 (use-package company
   :config (global-company-mode t))
 
-(use-package crux :bind ([remap open-line] . crux-smart-open-line))
+(use-package crux :bind ([remap open-line] . crux-smart-open-line-above))
 
 (use-package diff-hl :config (global-diff-hl-mode))
 
