@@ -81,7 +81,13 @@
 
 (use-package ace-window :bind ("M-o" . ace-window))
 
-(use-package avy :bind ("C-'" . avy-goto-char-2) ("M-g g" . avy-goto-line))
+(use-package avy
+  :bind
+  ("C-'" . avy-goto-char-2)
+  ("C-:" . avy-goto-char)
+  ("M-g f" . avy-goto-line)
+  ("M-g e" . avy-goto-word-0)
+  ("M-g w" . avy-goto-word-1))
 
 (use-package cargo :hook ((toml-mode rust-mode) . cargo-minor-mode))
 
