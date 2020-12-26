@@ -25,6 +25,7 @@
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
  '(c-basic-offset 4)
+ '(c-offsets-alist '((innamespace . 0)))
  '(confirm-kill-emacs 'yes-or-no-p)
  '(eldoc-echo-area-use-multiline-p nil)
  '(ido-enable-flex-matching t)
@@ -87,7 +88,8 @@
   ("C-:" . avy-goto-char)
   ("M-g f" . avy-goto-line)
   ("M-g e" . avy-goto-word-0)
-  ("M-g w" . avy-goto-word-1))
+  ("M-g w" . avy-goto-word-1)
+  ("M-g SPC". avy-goto-whitespace-end))
 
 (use-package cargo :hook ((toml-mode rust-mode) . cargo-minor-mode))
 
