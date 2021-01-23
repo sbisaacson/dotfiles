@@ -29,6 +29,7 @@
  '(c-offsets-alist '((innamespace . 0)))
  '(confirm-kill-emacs 'yes-or-no-p)
  '(eldoc-echo-area-use-multiline-p nil)
+ '(highlight-indent-guides-method 'character)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
  '(org-hide-leading-stars t)
