@@ -170,7 +170,7 @@
 If variable `transient-mark-mode' is activated, kill the region; otherwise
 kill backward until encountering the beginning of a word."
   (interactive (list (point) (mark)))
-  (cond ((and transient-mark-mode mark-active) (kill-region beg end))	
+  (cond ((and transient-mark-mode mark-active) (kill-region beg end))
 	(t (backward-kill-word 1))))
 
 (defun back-to-indentation-then-beginning-of-line ()
