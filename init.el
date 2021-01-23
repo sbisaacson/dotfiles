@@ -8,6 +8,7 @@
 (blink-cursor-mode 0)
 (column-number-mode 1)
 (electric-indent-mode 1)
+(electric-pair-mode 1)
 (scroll-bar-mode 0)
 (show-paren-mode 1)
 (tool-bar-mode 0)
@@ -64,7 +65,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(crux company-prescient selectrum-prescient selectrum smartparens diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
+   '(highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -119,6 +120,9 @@
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
 
+(use-package highlight-indent-guides
+  :hook (prog-mode . highlight-indent-guides-mode))
+
 (use-package magit
   :bind ("C-x M-g" . magit-dispatch)
   ("C-x g" . magit-status))
@@ -130,6 +134,9 @@
 	 ("C-<" . mc/mark-previous-like-this)
 	 ("C-+" . mc/mark-more-like-this-extended)
 	 ("C-S-c C-S-c" . mc/edit-lines)))
+
+(use-package paredit
+  :hook ((lisp-mode emacs-lisp-mode ielm-mode) . paredit-mode))
 
 (use-package prescient :config (selectrum-prescient-mode t) (company-prescient-mode t))
 
@@ -145,8 +152,6 @@
 (use-package rust-mode :defer t)
 
 (use-package selectrum :config (selectrum-mode t))
-
-(use-package smartparens :config (smartparens-global-strict-mode))
 
 (use-package solarized-theme
   :config (load-theme 'solarized-light t))
@@ -165,8 +170,7 @@
 If variable `transient-mark-mode' is activated, kill the region; otherwise
 kill backward until encountering the beginning of a word."
   (interactive (list (point) (mark)))
-  (cond ((and transient-mark-mode mark-active) (kill-region beg end))
-	(smartparens-strict-mode (sp-backward-kill-word 1))
+  (cond ((and transient-mark-mode mark-active) (kill-region beg end))	
 	(t (backward-kill-word 1))))
 
 (defun back-to-indentation-then-beginning-of-line ()

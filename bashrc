@@ -65,3 +65,6 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
+
+# opam configuration
+test -r /home/sbi/.opam/opam-init/init.sh && . /home/sbi/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
