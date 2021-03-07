@@ -41,6 +41,7 @@ function mess () {
 }
 
 alias objdump="/usr/bin/objdump -Mintel"
+alias disassemble="objdump -Cdr --visualize-jumps=color"
 alias grep="/usr/bin/grep --color=auto"
 alias egrep="/usr/bin/egrep --color=auto"
 alias fgrep="/usr/bin/fgrep --color=auto"
