@@ -71,3 +71,4 @@ fi
 test -r /home/sbi/.opam/opam-init/init.sh && . /home/sbi/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
 export RUST_BACKTRACE=1
+[ -f "/home/sbi/.ghcup/env" ] && source "/home/sbi/.ghcup/env" # ghcup-env
