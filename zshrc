@@ -20,7 +20,7 @@ if [[ $INSIDE_EMACS =~ ,comint ]]; then
 fi
 
 function messdir () {
-    printf "$HOME/mess/%(%Y/%W)T\n"
+    printf "$HOME/mess/$(date +%Y/%W)\n"
 }
 
 function mess () {
