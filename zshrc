@@ -4,7 +4,7 @@ export ZSH="/home/sbi/.oh-my-zsh"
 
 ZSH_THEME="lukerandall"
 
-plugins=(emacs ripgrep fzf)
+plugins=(emacs ripgrep fzf colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -20,6 +20,13 @@ alias v="gio open"
 if [[ $INSIDE_EMACS =~ ,comint ]]; then
     export PAGER=cat
 fi
+
+# -F: quit if output is a single screen
+# -q: quiet mode
+# -R: print escape sequences
+
+export LESS="-FqR"
+less_termcap[so]="${fg_bold[black]}${bg[white]}"
 
 function messdir () {
     printf "$HOME/mess/$(date +%Y/%W)\n"
