@@ -1,8 +1,10 @@
+#!/usr/bin/zsh
+
 export ZSH="/home/sbi/.oh-my-zsh"
 
 ZSH_THEME="lukerandall"
 
-plugins=(emacs ripgrep)
+plugins=(emacs ripgrep fzf)
 
 source $ZSH/oh-my-zsh.sh
 

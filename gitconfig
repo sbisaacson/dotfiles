@@ -9,3 +9,8 @@ defaultBranch = main
 
 [pull]
 ff = only 
+
+[alias]
+b = branch -vv
+s = status --short --branch
+l = log --oneline
