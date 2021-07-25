@@ -32,6 +32,7 @@
  '(highlight-indent-guides-method 'character)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
+ '(org-agenda-files nil)
  '(org-hide-leading-stars t)
  '(org-latex-classes
    '(("beamer" "\\documentclass[presentation]{beamer}"
@@ -66,7 +67,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(lua-mode haskell-mode highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
+   '(org-ref lua-mode haskell-mode highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -84,6 +85,7 @@
 
 (use-package ace-window :bind ("M-o" . ace-window))
 
+;; TODO: fix avy bindings in org-mode
 (use-package avy
   :bind
   ("C-'" . avy-goto-char-2)
