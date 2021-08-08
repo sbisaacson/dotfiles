@@ -14,3 +14,18 @@ ff = only
 b = branch -vv
 s = status --short --branch
 l = log --oneline
+
+[diff]
+tool = meld
+
+[difftool]
+prompt = true
+
+[difftool "meld"]
+cmd = meld "$LOCAL" "$REMOTE"
+
+[merge]
+tool = meld
+
+[mergetool "meld"]
+cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
