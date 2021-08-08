@@ -18,6 +18,10 @@
 	  (lambda ()
 	    (auto-fill-mode 1)
 	    (flyspell-mode 1)))
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (local-unset-key (kbd "C-c ["))
+	    (local-unset-key (kbd "C-c ]"))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -85,9 +89,8 @@
 
 (use-package ace-window :bind ("M-o" . ace-window))
 
-;; TODO: fix avy bindings in org-mode
 (use-package avy
-  :bind
+  :bind*
   ("C-'" . avy-goto-char-2)
   ("C-:" . avy-goto-char)
   ("M-g f" . avy-goto-line)
