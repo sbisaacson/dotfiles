@@ -12,6 +12,7 @@
 (scroll-bar-mode 0)
 (show-paren-mode 1)
 (tool-bar-mode 0)
+(global-auto-revert-mode 1)
 
 (add-hook 'prog-mode-hook (lambda () (linum-mode 1) (flymake-mode 1)))
 (add-hook 'text-mode-hook
