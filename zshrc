@@ -17,6 +17,8 @@ alias p="popd"
 alias o="$PAGER"
 alias v="gio open"
 
+bindkey '\e#' pound-insert
+
 if [[ $INSIDE_EMACS =~ ,comint ]]; then
     export PAGER=cat
 fi
