@@ -72,7 +72,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(org-ref lua-mode haskell-mode highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
+   '(company-lean lean-mode org-ref lua-mode haskell-mode highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(solarized-scale-org-headlines nil)
@@ -110,6 +110,8 @@
 (use-package company
   :config (global-company-mode t))
 
+(use-package company-lean)
+
 (use-package crux :bind ([remap open-line] . crux-smart-open-line-above))
 
 (use-package diff-hl :config (global-diff-hl-mode))
@@ -131,6 +133,8 @@
 
 (use-package highlight-indent-guides
   :hook (prog-mode . highlight-indent-guides-mode))
+
+(use-package lean-mode)
 
 (use-package lua-mode)
 
