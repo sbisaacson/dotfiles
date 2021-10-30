@@ -30,6 +30,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
+ '(avy-style 'words)
  '(c-basic-offset 4)
  '(c-offsets-alist '((innamespace . 0)))
  '(confirm-kill-emacs 'yes-or-no-p)
@@ -92,9 +93,9 @@
 
 (use-package avy
   :bind*
-  ("C-'" . avy-goto-char-2)
+  ("C-'" . avy-goto-char-timer)
   ("C-:" . avy-goto-char)
-  ("M-g f" . avy-goto-line)
+  ("M-g g" . avy-goto-line)
   ("M-g e" . avy-goto-word-0)
   ("M-g w" . avy-goto-word-1)
   ("M-g SPC". avy-goto-whitespace-end))
