@@ -3,8 +3,6 @@
 
 ;;; Code:
 
-(package-initialize)
-
 (blink-cursor-mode 0)
 (column-number-mode 1)
 (electric-indent-mode 1)
