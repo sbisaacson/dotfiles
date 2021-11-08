@@ -216,3 +216,6 @@ kill backward until encountering the beginning of a word."
   (server-start))
 
 ;;; init.el ends here
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
