@@ -36,6 +36,7 @@
  '(highlight-indent-guides-method 'character)
  '(ido-enable-flex-matching t)
  '(inhibit-startup-screen t)
+ '(load-prefer-newer t)
  '(org-agenda-files nil)
  '(org-hide-leading-stars t)
  '(org-latex-classes
@@ -213,6 +214,7 @@ kill backward until encountering the beginning of a word."
 (global-set-key (kbd "M-u") 'upcase-dwim)
 (global-set-key (kbd "M-l") 'downcase-dwim)
 (global-set-key (kbd "M-c") 'capitalize-dwim)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
 
 (unless noninteractive
   (server-start))
