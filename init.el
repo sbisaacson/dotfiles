@@ -74,6 +74,8 @@
    '(company-lean lean-mode org-ref lua-mode haskell-mode highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
+ '(search-whitespace-regexp "[ 	
+]+")
  '(solarized-scale-org-headlines nil)
  '(solarized-scale-outline-headlines nil)
  '(solarized-use-variable-pitch nil)
@@ -215,7 +217,7 @@ kill backward until encountering the beginning of a word."
 (unless noninteractive
   (server-start))
 
-;;; init.el ends here
+(setq isearch-regexp-lax-whitespace t)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
