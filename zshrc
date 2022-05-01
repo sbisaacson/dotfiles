@@ -4,31 +4,32 @@ export ZSH="/home/sbi/.oh-my-zsh"
 
 ZSH_THEME="lukerandall"
 
-plugins=(emacs ripgrep fzf colored-man-pages)
+plugins=(emacs ripgrep fzf)
 
 source $ZSH/oh-my-zsh.sh
-
 alias objdump="/usr/bin/objdump -Mintel"
 alias disassemble="objdump -Cdr --visualize-jumps=color"
 alias rm="/usr/bin/rm -i"
 alias cp="/usr/bin/cp -i"
 alias mv="/usr/bin/mv -i"
 alias p="popd"
-alias o="$PAGER"
+alias o="bat"
 alias v="gio open"
 
 bindkey '\e#' pound-insert
 
 if [[ $INSIDE_EMACS =~ ,comint ]]; then
     export PAGER=cat
+    alias o=cat
 fi
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # -F: quit if output is a single screen
 # -q: quiet mode
 # -R: print escape sequences
 
 export LESS="-FqR"
-less_termcap[so]="${fg_bold[black]}${bg[white]}"
 
 function messdir () {
     printf "$HOME/mess/$(date +%Y/%W)\n"
