@@ -31,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(Man-width 80)
  '(avy-style 'words)
- '(c-basic-offset 4)
+ '(c-basic-offset 2)
  '(c-offsets-alist '((innamespace . 0)))
  '(confirm-kill-emacs 'yes-or-no-p)
  '(eldoc-echo-area-use-multiline-p nil)

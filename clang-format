@@ -1,2 +1,20 @@
+AlignArrayOfStructures: Right
+AlignConsecutiveAssignments: true
+AlignConsecutiveBitFields: true
+AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: true
+AlignTrailingComments: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlwaysBreakBeforeMultilineStrings: true
 BasedOnStyle: LLVM
-IndentWidth: 4
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 132
+IndentCaseLabels: false
+IndentPPDirectives: AfterHash
+IndentWidth: 2
+# PointerAlignment: Left
+# QualifierAssignment: Right
+ReflowComments: false
