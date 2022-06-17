@@ -74,7 +74,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(tuareg company-lean lean-mode org-ref lua-mode haskell-mode highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
+   '(mini-frame marginalia helpful tuareg company-lean lean-mode org-ref lua-mode haskell-mode highlight-indent-guides paredit crux company-prescient selectrum-prescient selectrum diff-hl undo-tree easy-kill which-key projectile company cargo rust-mode eglot clang-format toml-mode multiple-cursors ace-window avy markdown-mode magit expand-region rainbow-delimiters auctex use-package solarized-theme))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(search-whitespace-regexp "[ 	
@@ -135,6 +135,13 @@
 
 (use-package haskell-mode :defer t)
 
+(use-package helpful
+  :bind (("C-h f" . #'helpful-callable)
+	 ("C-h k" . #'helpful-key)
+	 ("C-h v" . #'helpful-variable)
+	 ("C-h C" . #'helpful-command)
+	 ("C-c C-d" . #'helpful-at-point)))
+
 (use-package highlight-indent-guides
   :hook (prog-mode . highlight-indent-guides-mode))
 
@@ -146,7 +153,11 @@
   :bind ("C-x M-g" . magit-dispatch)
   ("C-x g" . magit-status))
 
+(use-package marginalia :config (marginalia-mode t))
+
 (use-package markdown-mode :defer t)
+
+(use-package mini-frame :config (mini-frame-mode t))
 
 (use-package multiple-cursors
   :bind (("C->" . mc/mark-next-like-this)
@@ -157,7 +168,7 @@
 (use-package paredit
   :hook ((lisp-mode emacs-lisp-mode ielm-mode) . paredit-mode))
 
-(use-package prescient :config (selectrum-prescient-mode t) (company-prescient-mode t))
+(use-package prescient :after selectrum :config (selectrum-prescient-mode t) (company-prescient-mode t))
 
 (use-package projectile
   :config (projectile-global-mode 1)
