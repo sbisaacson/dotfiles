@@ -79,22 +79,13 @@ if [[ -v XDG_RUNTIME_DIR ]]; then
 fi
 
 function sage () {
-    docker run -v "$PWD:/home/sage/data" -it sagemath/sagemath:latest
+    podman run -v "$PWD:/home/sage/data" -it docker.io/sagemath/sagemath:latest
 }
 
 function sage_nb () {
-    docker run -v "$PWD:/home/sage/data" -p8888:8888 sagemath/sagemath:latest sage-jupyter
+    podman run -v "$PWD:/home/sage/data" -p8888:8888 docker.io/sagemath/sagemath:latest sage-jupyter
 }
 
 function R () {
-    docker run -v "$PWD:/home/docker" -it --rm r-base:latest
+    podman run -v "$PWD:/home/docker" -it --rm docker.io/r-base:latest
 }
-
-# NB. There is an issue in docker: rootless mode and the overlay2
-# storage driver don't work with some containers. My current docker
-# config is
-#
-#     {
-#         "storage-driver": "fuse-overlayfs",
-#         "data-root": "$HOME/docker_data"
-#     }
